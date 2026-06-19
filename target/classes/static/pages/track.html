@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Track Order — QuickBite</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/index.html">🍱 QuickBite <span>Pune</span></a>
+    <div class="nav-right">
+      <a class="nav-link active" href="/pages/track.html">Track Order</a>
+      <a class="nav-link" href="/index.html">Restaurants</a>
+      <div class="nav-user-chip"><div class="nav-user-dot"></div><span id="navUserName"></span></div>
+      <a class="nav-logout" onclick="logout()">Log out</a>
+    </div>
+  </div>
+</nav>
+
+<div class="track-layout">
+
+  <!-- Map -->
+  <div>
+    <div class="track-map-box">
+      <div id="trackMap"></div>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="track-panel">
+
+    <!-- No order state -->
+    <div id="noOrder" class="no-order-box" style="display:none;">
+      <div class="no-order-icon">📦</div>
+      <h2>No active order</h2>
+      <p>Browse restaurants, add items and place an order to track it here.</p>
+      <a href="/index.html" class="btn-primary" style="display:inline-flex;margin-top:1rem;">Browse Restaurants</a>
+    </div>
+
+    <div id="orderPanel" style="display:none;contents;">
+
+      <!-- Status card -->
+      <div class="status-card-box">
+        <div class="status-icon-big" id="statusIcon">🍳</div>
+        <div>
+          <div class="status-label-text" id="statusLabel">Preparing your order</div>
+          <div class="status-sub-text" id="statusSub">Kitchen is on it</div>
+        </div>
+      </div>
+
+      <!-- Progress steps + ETA -->
+      <div class="progress-bar-wrap">
+        <div class="progress-steps">
+          <div class="step-node" id="s1"><div class="sdot done"></div><span>Confirmed</span></div>
+          <div class="step-line" id="l1"></div>
+          <div class="step-node" id="s2"><div class="sdot"></div><span>Preparing</span></div>
+          <div class="step-line" id="l2"></div>
+          <div class="step-node" id="s3"><div class="sdot"></div><span>On the way</span></div>
+          <div class="step-line" id="l3"></div>
+          <div class="step-node" id="s4"><div class="sdot"></div><span>Delivered</span></div>
+        </div>
+        <div class="eta-row">
+          <span class="eta-label">Estimated arrival</span>
+          <span class="eta-number" id="etaDisplay">--</span>
+        </div>
+      </div>
+
+      <!-- Delivered banner -->
+      <div class="delivered-banner" id="deliveredBanner">
+        <div class="delivered-banner-icon">🎉</div>
+        <div class="delivered-banner-text">
+          <h3>Delivered!</h3>
+          <p>Your order has arrived. Enjoy your meal!</p>
+        </div>
+      </div>
+
+      <!-- Delivery partner card -->
+      <div class="partner-card">
+        <p class="partner-card-title">Your Delivery Partner</p>
+        <div class="partner-main">
+          <div class="partner-avatar" id="partnerAvatar">--</div>
+          <div>
+            <div class="partner-name"   id="partnerName">--</div>
+            <div class="partner-vehicle" id="partnerVehicle">--</div>
+            <div class="partner-rating"  id="partnerRating">--</div>
+          </div>
+        </div>
+        <div class="partner-meta-row">
+          <div class="partner-chip">📍 <span id="partnerArea">--</span></div>
+          <div class="partner-chip">📞 <span id="partnerPhone">--</span></div>
+        </div>
+        <button class="btn-primary partner-call-btn"
+          onclick="alert('In production this would dial your rider!')">📞 Call Rider</button>
+      </div>
+
+      <!-- Order summary -->
+      <div class="order-summary-box">
+        <p class="order-summary-title">Order Details</p>
+        <p style="font-size:.78rem;color:var(--text3);margin-bottom:.3rem;">
+          Order <strong id="trackOrderId"></strong>
+        </p>
+        <p style="font-size:.78rem;color:var(--text3);margin-bottom:.3rem;">
+          From <strong id="trackRestName"></strong>
+        </p>
+        <p style="font-size:.78rem;color:var(--text3);margin-bottom:.75rem;">
+          Delivering to <strong id="trackDeliveryArea"></strong>
+        </p>
+        <div id="trackItems"></div>
+        <div class="pay-method-chip" id="trackPayMethod"></div>
+      </div>
+
+      <button class="btn-ghost full-width" onclick="resetOrder()" style="margin-top:.25rem;">
+        ✕ Cancel &amp; go home
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/track.js"></script>
+</body>
+</html>

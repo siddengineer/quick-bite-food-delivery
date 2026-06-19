@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QuickBite — Pune Food Delivery</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/index.html">🍱 QuickBite <span>Pune</span></a>
+    <div class="nav-right">
+      <a class="nav-link active" href="/index.html">Restaurants</a>
+      <a class="nav-link" href="/pages/track.html">Track Order</a>
+      <div class="nav-user-chip"><div class="nav-user-dot"></div><span id="navUserName"></span></div>
+      <a class="nav-logout" onclick="logout()">Log out</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">🍴 Pune's Favourite Food App</p>
+    <h1 class="hero-title">Hey <span id="heroName">there</span>, what are you craving? 🍽️</h1>
+    <p class="hero-sub">Restaurants near <strong id="heroArea">your area</strong> — sorted by distance</p>
+    <div class="search-wrap">
+      <div class="search-bar-row">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search restaurant, cuisine or area…"
+          oninput="onSearch()" autocomplete="off">
+        <button class="search-clear" id="clearBtn" onclick="clearSearch()" style="display:none;">✕</button>
+      </div>
+    </div>
+    <div class="chips-row" id="cuisineChips"></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="result-info"><span id="count">0</span> restaurants found</div>
+    <div class="sort-row">
+      <span class="sort-label">Sort:</span>
+      <button class="sort-btn active" data-sort="distance" onclick="setSortMode('distance')">📍 Nearest</button>
+      <button class="sort-btn" data-sort="rating"   onclick="setSortMode('rating')">⭐ Rating</button>
+      <button class="sort-btn" data-sort="popular"  onclick="setSortMode('popular')">🔥 Popular</button>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <div class="rest-list" id="restaurantList">
+      <div class="loading-list">Loading restaurants…</div>
+    </div>
+  </div>
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-footer">
+      <span><span class="dot-leg" style="background:#FF6B35;"></span>Restaurant</span>
+      <span><span class="dot-leg" style="background:#34C759;"></span>You</span>
+      <span class="map-footer-tip">Click any pin or card to highlight</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/map.js"></script>
+</body>
+</html>

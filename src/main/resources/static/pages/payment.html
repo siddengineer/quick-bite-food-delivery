@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Payment — QuickBite</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/index.html">🍱 QuickBite <span>Pune</span></a>
+    <div class="nav-right">
+      <a class="nav-link" href="javascript:history.back()">← Back</a>
+      <div class="nav-user-chip"><div class="nav-user-dot"></div><span id="navUserName"></span></div>
+      <a class="nav-logout" onclick="logout()">Log out</a>
+    </div>
+  </div>
+</nav>
+
+<div class="pay-layout">
+
+  <!-- Left: payment methods -->
+  <div>
+    <p class="pay-section-title">Choose Payment Method</p>
+
+    <div class="pay-method-card selected" data-method="upi" onclick="selectPayment('upi')">
+      <div class="pay-method-icon">📲</div>
+      <div><div class="pay-method-name">UPI</div><div class="pay-method-sub">GPay · PhonePe · Paytm</div></div>
+      <div class="pay-radio"></div>
+    </div>
+    <div class="pay-detail" id="detail-upi" style="display:block;">
+      <div class="form-group">
+        <label>UPI ID</label>
+        <input type="text" id="upiId" placeholder="yourname@upi">
+      </div>
+    </div>
+
+    <div class="pay-method-card" data-method="card" onclick="selectPayment('card')">
+      <div class="pay-method-icon">💳</div>
+      <div><div class="pay-method-name">Credit / Debit Card</div><div class="pay-method-sub">Visa · Mastercard · RuPay</div></div>
+      <div class="pay-radio"></div>
+    </div>
+    <div class="pay-detail" id="detail-card">
+      <div class="form-group">
+        <label>Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+      </div>
+      <div class="card-row">
+        <div class="form-group"><label>Expiry</label><input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"></div>
+        <div class="form-group"><label>CVV</label><input type="password" id="cardCVV" placeholder="•••" maxlength="4"></div>
+      </div>
+      <div class="form-group">
+        <label>Name on Card</label>
+        <input type="text" id="cardName" placeholder="As printed on card">
+      </div>
+    </div>
+
+    <div class="pay-method-card" data-method="cod" onclick="selectPayment('cod')">
+      <div class="pay-method-icon">💵</div>
+      <div><div class="pay-method-name">Cash on Delivery</div><div class="pay-method-sub">Pay when your order arrives</div></div>
+      <div class="pay-radio"></div>
+    </div>
+
+    <p class="pay-error" id="payError"></p>
+
+    <button id="payBtn" class="btn-primary full-width pay-btn" onclick="confirmPayment()">
+      Pay <span id="payBtnTotal"></span>
+    </button>
+    <p style="text-align:center;font-size:.75rem;color:var(--text3);margin-top:.6rem;">
+      🔒 Demo only — no real payment is processed
+    </p>
+  </div>
+
+  <!-- Right: order summary -->
+  <div>
+    <div class="pay-summary-box">
+      <p class="pay-summary-title">Order Summary</p>
+      <div class="pay-rest-chip">
+        <div class="pay-rest-emoji">🍴</div>
+        <div>
+          <div class="pay-rest-name" id="payRestName"></div>
+          <div class="pay-rest-area">📍 <span id="payArea"></span></div>
+        </div>
+      </div>
+      <div id="payItems"></div>
+      <div style="height:.5rem;"></div>
+      <div class="pay-fee-row"><span>Subtotal</span><span id="paySubtotal"></span></div>
+      <div class="pay-fee-row"><span>GST (5%)</span><span id="payTax"></span></div>
+      <div class="pay-fee-row"><span>Delivery fee</span><span id="payDelivery"></span></div>
+      <div class="pay-total-row"><span>Total</span><span id="payTotal"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Success overlay -->
+<div class="pay-success-overlay" id="paySuccessOverlay">
+  <div class="pay-success-card">
+    <div class="pay-success-icon">🎉</div>
+    <h2 class="pay-success-title">Order Placed!</h2>
+    <p class="pay-success-sub">Order <strong id="successOrderId"></strong> confirmed. Your delivery partner has been assigned.</p>
+    <div class="pay-success-partner">
+      <div class="pay-success-partner-label">Your Delivery Partner</div>
+      <div class="pay-success-partner-info">
+        <div style="width:38px;height:38px;background:var(--brand-light);color:var(--brand);border-radius:10px;
+                    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;"
+             id="successPartnerAvatar"></div>
+        <div>
+          <div class="partner-info-name" id="successPartnerName"></div>
+          <div class="partner-info-sub" id="successPartnerVehicle"></div>
+          <div class="partner-info-sub" id="successPartnerRating"></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:.9rem;">Redirecting to live tracking…</p>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/payment.js"></script>
+</body>
+</html>

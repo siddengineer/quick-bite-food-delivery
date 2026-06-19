@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Menu — QuickBite</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.rmeta-pill{background:rgba(244,185,66,.18);color:var(--gold);font-weight:700;padding:.15rem .5rem;border-radius:5px;font-size:.82rem;}
+.rmeta-sep{opacity:.35;margin:0 .1rem;}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/index.html">🍱 QuickBite <span>Pune</span></a>
+    <div class="nav-right">
+      <a class="nav-link" href="/index.html">← All Restaurants</a>
+      <a class="nav-link" href="/pages/track.html">Track Order</a>
+      <div class="nav-user-chip"><div class="nav-user-dot"></div><span id="navUserName"></span></div>
+      <a class="nav-logout" onclick="logout()">Log out</a>
+    </div>
+  </div>
+</nav>
+
+<div class="rest-hero">
+  <div class="rest-hero-inner">
+    <h1 class="rest-hero-name" id="restName"></h1>
+    <div class="rest-hero-meta" id="restMeta"></div>
+    <div class="rest-hero-address" id="restAddress"></div>
+    <div class="top-dish-row" id="topDishes"></div>
+  </div>
+</div>
+
+<div class="menu-layout">
+  <div>
+    <p class="menu-section-title">Full Menu</p>
+    <div id="menuGrid"></div>
+  </div>
+  <div>
+    <div class="cart-box">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem;">
+        <h3 class="cart-title">Your Cart</h3>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </div>
+      <div class="cart-delivery-chip">📍 Delivering to <strong id="deliveryArea" style="margin-left:3px;"></strong></div>
+      <p class="cart-empty" id="cartEmpty">Add dishes to get started.</p>
+      <div class="cart-body" id="cartBody"></div>
+      <div id="cartFooter" style="display:none;">
+        <div class="cart-divider"></div>
+        <div class="cart-fee-row"><span>Subtotal</span><span id="cartSubtotal"></span></div>
+        <div class="cart-fee-row"><span>GST (5%)</span><span id="cartTax"></span></div>
+        <div class="cart-fee-row"><span>Delivery fee</span><span id="cartDelivery"></span></div>
+        <div class="cart-total-row"><span>Total</span><span id="cartTotal"></span></div>
+        <button class="btn-primary full-width" style="margin-top:.8rem;" onclick="proceedToPayment()">
+          Proceed to Payment →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/menu.js"></script>
+</body>
+</html>

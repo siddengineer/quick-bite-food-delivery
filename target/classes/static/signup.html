@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sign Up — QuickBite Pune</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-body">
+<div class="auth-split">
+  <div class="auth-brand">
+    <div class="auth-brand-inner">
+      <div class="brand-logo">🍱</div>
+      <h1 class="brand-name">QuickBite</h1>
+      <p class="brand-city">Pune</p>
+      <p class="brand-tagline">Join Pune's fastest food delivery app. Pick your area and discover restaurants near you.</p>
+      <div class="brand-feats">
+        <div class="brand-feat"><div class="brand-feat-icon">📍</div>Set your area — restaurants sort by distance</div>
+        <div class="brand-feat"><div class="brand-feat-icon">🛵</div>Real delivery partner assigned on each order</div>
+        <div class="brand-feat"><div class="brand-feat-icon">🎉</div>Free to join — no hidden charges</div>
+      </div>
+    </div>
+  </div>
+  <div class="auth-form-panel">
+    <div class="auth-form-box">
+      <h2 class="auth-title">Create account</h2>
+      <p class="auth-sub">30 seconds — just tell us your area</p>
+      <div id="errorMsg" class="auth-error"></div>
+      <div class="form-group">
+        <label>Full name</label>
+        <input type="text" id="fullName" placeholder="Rahul Sharma" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Phone number</label>
+        <div class="phone-row">
+          <span class="phone-prefix">+91</span>
+          <input type="tel" id="phone" placeholder="98765 43210" maxlength="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Delivery area <span class="label-hint">— restaurants sort by distance from here</span></label>
+        <select id="areaSelect" onchange="onAreaChange(this.value)">
+          <option value="">Select your area in Pune…</option>
+          <option>Shivajinagar</option><option>Koregaon Park</option><option>Kothrud</option>
+          <option>Baner</option><option>Aundh</option><option>Viman Nagar</option>
+          <option>Camp</option><option>Yerwada</option><option>Deccan Gymkhana</option>
+          <option>Wakad</option><option>Hinjewadi</option><option>Hadapsar</option>
+          <option>Magarpatta</option><option>Kalyani Nagar</option><option>Balewadi</option>
+          <option>Kharadi</option><option>Pashan</option><option>FC Road</option>
+          <option>Kondhwa</option><option>Pimple Saudagar</option>
+        </select>
+      </div>
+      <div class="area-map-preview" id="areaMapWrap">
+        <div id="areaMap"></div>
+        <p class="area-map-label" id="areaMapLabel">📍 Your delivery pin</p>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="password" placeholder="At least 6 characters">
+          <button type="button" class="toggle-pw" onclick="togglePw('password',this)">Show</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirm password</label>
+        <div class="pw-wrap">
+          <input type="password" id="confirmPassword" placeholder="Repeat password">
+          <button type="button" class="toggle-pw" onclick="togglePw('confirmPassword',this)">Show</button>
+        </div>
+      </div>
+      <button class="btn-primary full-width auth-btn" onclick="handleSignup()">Create my account</button>
+      <p class="auth-switch">Already have an account? <a href="/login.html">Log in</a></p>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/signup.js"></script>
+</body>
+</html>
